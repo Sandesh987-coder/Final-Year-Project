@@ -75,23 +75,23 @@ const RoomsPage = () => {
   };
 
   return (
-    <div className="flex min-h-screen bg-gray-900 text-gray-200">
+    <div className="flex min-h-screen bg-[var(--bg-primary)] text-[var(--txt)]">
       <div className="flex-1 p-6 overflow-y-auto">
         {/* Your Rooms */}
         <section className="mb-10">
           <h2 className="text-xl font-semibold mb-4">Your Rooms</h2>
           <div className="flex flex-wrap gap-4">
             {yourRooms.map((room, i) => (
-              <div key={i} className="bg-gray-800 rounded-lg shadow-md p-4 w-64">
-                <h3 className="text-lg font-bold">{room.name}</h3>
-                <p className="text-sm text-gray-400">{room.category}</p>
-                <p className="text-sm text-gray-500">{room.description}</p>
+              <div key={i} className="bg-[var(--bg-sec)] rounded-[var(--radius)] shadow-sm p-4 w-64 hover:shadow-md transition">
+                <h3 className="text-lg font-bold text-[var(--txt)]">{room.name}</h3>
+                <p className="text-sm text-[var(--txt-dim)]">{room.category}</p>
+                <p className="text-sm text-[var(--txt-disabled)]">{room.description}</p>
                 <div className="flex justify-between mt-3">
-                  <button className="bg-purple-700 hover:bg-purple-800 text-white px-3 py-1 rounded">
+                  <button className="bg-[var(--btn)] hover:bg-[var(--btn-hover)] text-white px-3 py-1 rounded-[var(--radius)] transition">
                     {room.action}
                   </button>
                   <button
-                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded"
+                    className="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-[var(--radius)] transition"
                     onClick={() => handleDeleteRoom(i)}
                   >
                     Delete
@@ -113,9 +113,9 @@ const RoomsPage = () => {
             placeholder="Search rooms..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full max-w-sm mb-4 px-3 py-2 rounded bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+            className="w-full max-w-sm mb-4 px-3 py-2 rounded-[var(--radius)] bg-[var(--bg-sec)] text-[var(--txt)] placeholder-[var(--txt-dim)] focus:outline-none focus:ring-2 focus:ring-[var(--btn)]"
           />
-          <FilterBar filters={filters} onFilter={setSelectedFilter} />
+          <FilterBar filters={filters} onFilter={setSelectedFilter} activeFilter={selectedFilter} />
           <RoomList rooms={filteredRooms} />
         </section>
       </div>
@@ -123,45 +123,45 @@ const RoomsPage = () => {
       {/* Modal */}
       {showModal && (
         <div className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
-          <div className="bg-gray-800 p-6 rounded-lg shadow-lg w-96">
-            <h3 className="text-lg font-semibold mb-4">Create a New Room</h3>
+          <div className="bg-[var(--bg-sec)] p-6 rounded-[var(--radius)] shadow-lg w-96">
+            <h3 className="text-lg font-semibold mb-4 text-[var(--txt)]">Create a New Room</h3>
             <form onSubmit={handleCreateRoom} className="space-y-3">
               <input
                 type="text"
                 placeholder="Room Name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="w-full px-3 py-2 rounded bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="w-full px-3 py-2 rounded-[var(--radius)] bg-[var(--bg-primary)] text-[var(--txt)] placeholder-[var(--txt-dim)] focus:outline-none focus:ring-2 focus:ring-[var(--btn)]"
               />
               <select
-  value={formData.category}
-  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-  className="w-full px-3 py-2 rounded bg-gray-700 text-gray-200 focus:outline-none focus:ring-2 focus:ring-purple-600"
->
-  <option value="">Select Category</option>
-  {categories.map((cat, i) => (
-    <option key={i} value={cat}>
-      {cat}
-    </option>
-  ))}
-</select>
+                value={formData.category}
+                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                className="w-full px-3 py-2 rounded-[var(--radius)] bg-[var(--bg-primary)] text-[var(--txt)] focus:outline-none focus:ring-2 focus:ring-[var(--btn)]"
+              >
+                <option value="">Select Category</option>
+                {categories.map((cat, i) => (
+                  <option key={i} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
               <textarea
                 placeholder="Description"
                 value={formData.description}
                 onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="w-full px-3 py-2 rounded bg-gray-700 text-gray-200 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-600"
+                className="w-full px-3 py-2 rounded-[var(--radius)] bg-[var(--bg-primary)] text-[var(--txt)] placeholder-[var(--txt-dim)] focus:outline-none focus:ring-2 focus:ring-[var(--btn)]"
               />
               <div className="flex justify-end gap-3">
                 <button
                   type="submit"
-                  className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded"
+                  className="bg-[var(--btn)] hover:bg-[var(--btn-hover)] text-white px-4 py-2 rounded-[var(--radius)] transition"
                 >
                   Create
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded"
+                  className="bg-[var(--bg-ter)] hover:bg-[var(--bg-sec)] text-white px-4 py-2 rounded-[var(--radius)] transition"
                 >
                   Cancel
                 </button>
